@@ -6,11 +6,6 @@
  */
 abstract class Controller
 {
-    //protected $_auth; // Zend_Auth::getInstance()
-
-    public function __construct()
-    { }
-
     protected function before()
     { }
 
@@ -20,7 +15,7 @@ abstract class Controller
     private function checkFileName($fileName)
     {
         if (!ctype_alnum(str_replace('_', '', $fileName))) {
-            throw new Exception('invalid view file name.', 500);
+            throw new Exception('invalid view file name.');
         }
         return true;
     }
@@ -28,21 +23,22 @@ abstract class Controller
     protected function render($fileName)
     {
         $this->checkFileName($fileName);
-        require VIEWS_PATH . '/header.php';
-        require VIEWS_PATH . "/$fileName.php";
-        require VIEWS_PATH . '/footer.php';
+        require VIEWS_PATH . DIRECTORY_SEPARATOR . VIEW_HEADER_FILE_NAME . PHP_EXTENSION;
+        require VIEWS_PATH . DIRECTORY_SEPARATOR . $fileName . PHP_EXTENSION;
+        require VIEWS_PATH . DIRECTORY_SEPARATOR . VIEW_FOOTER_FILE_NAME . PHP_EXTENSION;
     }
+
     protected function renderOnly($fileName)
     {
         $this->checkFileName($fileName);
-        require VIEWS_PATH . "/$fileName.php";
+        require VIEWS_PATH . DIRECTORY_SEPARATOR . $fileName . PHP_EXTENSION;
     }
 
     protected function renderXml($fileName)
     {
         $this->checkFileName($fileName);
-        header("Content-Type: application/xml");
-        require VIEWS_PATH . "/$fileName.php";
+        header('Content-Type: application/xml');
+        require VIEWS_PATH . DIRECTORY_SEPARATOR . $fileName . PHP_EXTENSION;
     }
 
     protected function renderJson($data, $callback = null)
@@ -55,7 +51,7 @@ abstract class Controller
         }
     }
 
-    protected function __call($methodName, $args)
+    public function __call($methodName, $args)
     {
         if ('Action' === substr($methodName, -6)) {
             throw new NotFoundException;

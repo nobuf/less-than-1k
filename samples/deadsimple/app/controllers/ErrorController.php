@@ -9,6 +9,7 @@ class ErrorController extends Controller
         if (!empty($this->_renderType)) {
             call_user_func(array($this, 'render' . ucfirst($this->_renderType)), $message);
         } else {
+            $this->message = $message;
             $this->render('error');
         }
     }

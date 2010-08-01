@@ -15,13 +15,11 @@ class DB
      * @return void
      */
     private function __construct()
-    {
-    }
+    { }
 
     /**
      * singleton 
      * 
-     * @param string $dbname 
      * @static
      * @access public
      * @return object
@@ -29,14 +27,8 @@ class DB
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            /*
-            $db = new PDO(DATABASE_DSN, DATABASE_USER, DATABASE_PASSWORD);
-            $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            self::$instance = $db;
-             */
-            /*
-            self::$instance = new Mongo;
-             */
+            $className = DATABASE_DRIVER;
+            self::$instance = $className::factory();
         }
         return self::$instance;
     }

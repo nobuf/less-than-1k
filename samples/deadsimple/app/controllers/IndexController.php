@@ -4,6 +4,6 @@ class IndexController extends Controller
 {
     public function indexAction()
     {
-        $this->render('top');
+        $this->render('index');
     }
 }
