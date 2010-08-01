@@ -1,5 +1,12 @@
 <?php
-
+/**
+ *  Tested on:
+ *      PHP5.3.3
+ *      Zend Framework 1.9.7
+ *      PHPUnit 3.4.15
+ *
+ *  % phpunit tests/AccessPagesTest.php
+ */
 require 'Zend/Http/Client.php';
 require_once 'PHPUnit/Framework.php';
 
