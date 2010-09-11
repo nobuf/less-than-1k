@@ -20,6 +20,17 @@ abstract class Controller
         return true;
     }
 
+    protected function redirect($path)
+    {
+        if (strpos($path, 'http') === 0) {
+            header("Location: $path");
+            exit;
+        } else {
+            header("Location: " . SERVER_URL . $path);
+            exit;
+        }
+    }
+
     protected function render($fileName)
     {
         $this->checkFileName($fileName);
