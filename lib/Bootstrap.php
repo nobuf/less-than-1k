@@ -6,7 +6,7 @@ defined('VIEW_ERROR_FILE_NAME') || define('VIEW_ERROR_FILE_NAME', 'error');
 
 
 
-function __autoload($className)
+function bootstrap_autoload($className)
 {
     $filePath = str_replace('_', DIRECTORY_SEPARATOR, $className) . PHP_EXTENSION;
     $includePaths = explode(PATH_SEPARATOR, get_include_path());
@@ -17,6 +17,7 @@ function __autoload($className)
         }
     }
 }
+spl_autoload_register('bootstrap_autoload');
 
 //  standardize the error handling
 function exception_error_handler($errno, $errstr, $errfile, $errline) {
