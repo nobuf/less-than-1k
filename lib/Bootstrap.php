@@ -50,10 +50,7 @@ class Bootstrap
         //  URL routing
         try {
             $idx = strpos($_SERVER['REQUEST_URI'], '?');
-            if ($idx !== false) {
-                $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], 0, $idx);
-            }
-            $requestUri = explode('/', $_SERVER['REQUEST_URI']);
+            $requestUri = explode('/', ($idx !== false ? substr($_SERVER['REQUEST_URI'], 0, $idx) : $_SERVER['REQUEST_URI']));
             $count = count($requestUri);
             if ($count < 2) {
                 throw new Exception('invalid request uri.');
